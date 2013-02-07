@@ -39,10 +39,26 @@ inline void sinCos(float theta,float* outSin,float *outCos)
 }
 
 template<class T>
-inline T clamp(T val,T minVal,T maxVal)
+inline T clamp(const T& val,const T& minVal,const T maxVal)
 {
 	assert(minVal <= maxVal);
-	return std::max(minVal,std::min(val,maxVal));
+	return std::max<T>(minVal,std::min<T>(val,maxVal));
+}
+
+//remeber to seed by call srand()
+
+inline float randf(float low,float high)
+{
+	if (low >= high)
+		return low;
+	return (high-low) * ((rand()%10000) * 0.0001f) + low;
+}
+
+inline long randl(long low,long high)
+{
+	if (low >= high)
+		return low;
+	return (long)( (high-low) * ((rand()%10000) * 0.0001f) + low);
 }
 
 #endif

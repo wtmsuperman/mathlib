@@ -47,6 +47,12 @@ public:
 		max.x = max.y = max.z = FLT_MIN;
 	}
 
+	void makeInfinity()
+	{
+		min.x = min.y = min.z = FLT_MIN;
+		max.x = max.y = max.z = FLT_MAX;
+	}
+
 	bool isEmpty() const
 	{
 		return min.x > max.x || min.y > max.y || min.z > max.z;
@@ -93,5 +99,7 @@ public:
 		return ::intersects(ray,*this,t);
 	}
 };
+
+Vector3 randVector3(const Vector3& low,const Vector3& high);
 
 #endif

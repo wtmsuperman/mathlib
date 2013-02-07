@@ -108,9 +108,19 @@ public:
 		return x > v.x && y > v.y && z > v.z;
 	}
 
+	bool operator >= (const Vector3& v) const 
+	{
+		return x >= v.x && y >= v.y && z >= v.z;
+	}
+
 	bool operator < (const Vector3& v) const
 	{
 		return x < v.x && y < v.y && z < v.z;
+	}
+
+	bool operator <= (const Vector3& v) const
+	{
+		return x <= v.x && y < v.y && z <= v.z;
 	}
 
 	float& operator[] (size_t i)
@@ -185,5 +195,4 @@ public:
 					,v1.x * v2.y - v1.y * v2.x);
 	}
 };
-
 #endif

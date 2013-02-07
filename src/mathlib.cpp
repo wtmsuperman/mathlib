@@ -22,3 +22,11 @@ float wrapPi(float theta)
 	theta -= PI;
 	return theta;
 }
+
+Vector3 randVector3(const Vector3& low,const Vector3& high)
+{
+	if (low >= high)
+		return low;
+
+	return Vector3(randf(low.x,high.x),randf(low.y,high.y),randf(low.z,high.z));
+}
