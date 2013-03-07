@@ -89,5 +89,6 @@ public:
 };
 
 Vector3 operator* (const Vector3& v,const Matrix3x3& m);
+Vector3& operator*= (Vector3& v,const Matrix3x3& m);
 
 #endif

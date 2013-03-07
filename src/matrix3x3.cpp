@@ -3,6 +3,12 @@
 #include "quaternion.h"
 #include "eulerAngles.h"
 
+Vector3& operator*= (Vector3& v,const Matrix3x3& m)
+{
+	v = v * m;
+	return v;
+}
+
 void Matrix3x3::setupRotate(const EulerAngles& e)
 {
 	float sh,sp,sb,ch,cp,cb;

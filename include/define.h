@@ -47,17 +47,19 @@ inline T clamp(const T& val,const T& minVal,const T maxVal)
 
 //remeber to seed by call srand()
 
+//return random float between 0 and 1.0
+inline float randf()
+{
+	return (rand() % 10000) * 0.0001f;
+}
+
 inline float randf(float low,float high)
 {
-	if (low >= high)
-		return low;
 	return (high-low) * ((rand()%10000) * 0.0001f) + low;
 }
 
 inline long randl(long low,long high)
 {
-	if (low >= high)
-		return low;
 	return (long)( (high-low) * ((rand()%10000) * 0.0001f) + low);
 }
 

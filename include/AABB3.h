@@ -44,12 +44,12 @@ public:
 	void makeEmpty()
 	{
 		min.x = min.y = min.z = FLT_MAX;
-		max.x = max.y = max.z = FLT_MIN;
+		max.x = max.y = max.z = -FLT_MAX;
 	}
 
 	void makeInfinity()
 	{
-		min.x = min.y = min.z = FLT_MIN;
+		min.x = min.y = min.z = -FLT_MAX;
 		max.x = max.y = max.z = FLT_MAX;
 	}
 

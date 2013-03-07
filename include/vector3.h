@@ -2,6 +2,8 @@
 #define __M_MATH_LIB_VEC3__
 
 #include "define.h"
+#include "matrix3x3.h"
+#include "quaternion.h"
 
 class Vector3
 {
@@ -172,6 +174,79 @@ public:
 	{
 		return (squaredLength() == EPSINON * EPSINON);
 	}
+
+	/** Generates a vector perpendicular to this vector (eg an 'up' vector).
+            @remarks
+                This method will return a vector which is perpendicular to this
+                vector. There are an infinite number of possibilities but this
+                method will guarantee to generate one of them. If you need more
+                control you should use the Quaternion class.
+        */
+	inline Vector3 perpendicular(void) const
+    {
+            static const float fSquareZero = (float)(1e-06 * 1e-06);
+
+            Vector3 perp = crossProduct(*this, Vector3::UNIT_X);
+
+            // Check length
+            if( perp.squaredLength() < fSquareZero )
+            {
+                /* This vector is the Y axis multiplied by a scalar, so we have
+                   to use another axis.
+                */
+                perp = this->crossProduct( Vector3::UNIT_Y,*this);
+            }
+			perp.normalize();
+
+            return perp;
+    }
+
+	/** Generates a new random vector which deviates from this vector by a
+            given angle in a random direction.
+            @remarks
+                This method assumes that the random number generator has already
+                been seeded appropriately.
+            @param
+                angle The angle at which to deviate
+            @param
+                up Any vector perpendicular to this one (which could generated
+                by cross-product of this vector and any other non-colinear
+                vector). If you choose not to provide this the function will
+                derive one on it's own, however if you provide one yourself the
+                function will be faster (this allows you to reuse up vectors if
+                you call this method more than once)
+            @return
+                A random vector which deviates from this vector by angle. This
+                vector will not be normalised, normalise it if you wish
+                afterwards.
+        */
+        inline Vector3 randomDeviant(
+            float theta,
+            const Vector3& up = Vector3::ZERO ) const
+        {
+            Vector3 newUp;
+
+            if (up == Vector3::ZERO)
+            {
+                // Generate an up vector
+                newUp = this->perpendicular();
+            }
+            else
+            {
+                newUp = up;
+            }
+
+            // Rotate up vector by random amount around this
+            Quaternion q;
+			q.setToRotateAxis(*this,randf() * k2PI);
+			Matrix3x3 r(q);
+            newUp = newUp * r;
+
+            // Finally rotate this by given angle around randomised up
+			q.setToRotateAxis( newUp, theta );
+			r.fromQuaternion(q);
+            return (*this) * r;
+        }
 
 	bool operator== (const Vector3& v) const
 	{
