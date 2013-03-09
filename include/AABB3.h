@@ -76,7 +76,7 @@ public:
 
 	void setToTransformedBox(const AABB3& box,const Matrix4x4& m);
 
-	bool cantains(const Vector3& point) const
+	bool contains(const Vector3& point) const
 	{
 		return point.x >= min.x && point.y >= min.y && point.z >= min.z
 			&& point.x <= max.x && point.y <= max.y && point.z <= max.z;
