@@ -143,7 +143,11 @@ public:
 };
 
 Quaternion slerp(const Quaternion& q1,const Quaternion& q2,float f);
-inline Quaternion conjugate(const Quaternion& q);
+
+inline Quaternion conjugate(const Quaternion& q)
+{
+	return Quaternion(q.w,-q.x,-q.y,-q.z);
+}
 inline float dotProduct(const Quaternion& q,const Quaternion& q1);
 
 #endif

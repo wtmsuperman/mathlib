@@ -116,11 +116,6 @@ Quaternion slerp(const Quaternion& q1,const Quaternion& q2,float t)
 	return result;
 }
 
-Quaternion conjugate(const Quaternion& q)
-{
-	return Quaternion(q.w,-q.x,-q.y,-q.z);
-}
-
 Vector3 Quaternion::xAxis() const
 {
 	float ww = 2.0f * w;
