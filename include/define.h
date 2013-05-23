@@ -29,6 +29,7 @@ inline bool fequal(float a,float b)
 
 float safeAcos(float x);
 
+// wrap angle between [-pi,pi]
 float wrapPi(float theta);
 
 //某些特定平台，同时计算，速度更快

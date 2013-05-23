@@ -73,6 +73,30 @@ public:
 	void setupRotateTo(const Vector3& axis,float angle);
 	void fromQuaternion(const Quaternion& q);
 
+	void setupRotateX(float angle)
+	{
+		float sine;
+		float cose;
+		sinCos(angle,&sine,&cose);
+		m[5]=cose,m[6]=sine,m[9]=-sine,m[10]=cose;
+	};
+
+	void setupRotateY(float angle)
+	{
+		float sine;
+		float cose;
+		sinCos(angle,&sine,&cose);
+		m[0]=cose,m[2]=-sine,m[8]=sine,m[10]=cose;
+	};
+
+	void setupRotateZ(float angle)
+	{
+		float sine;
+		float cose;
+		sinCos(angle,&sine,&cose);
+		m[0]=cose,m[1]=sine,m[4]=-sine,m[5]=cose;
+	};
+
 	void transpose()
 	{
 		std::swap(m12,m21);
